@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Demo.Presentation.Controllers
 {
     [ApiController]
+    [Route("api/[controller]")]
     public class Weather : Controller
     {
         public readonly IWeather _weather;
@@ -12,6 +13,7 @@ namespace Demo.Presentation.Controllers
 
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var weatherDetails =await _weather.GetAllWeather();

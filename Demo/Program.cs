@@ -1,3 +1,4 @@
+using Demo.Application;
 using Demo.Infrastructure;
 using Demo.Presentation.Middlewares;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddTransient<IWeather,WeatherService>();
+
+builder.Services.AddScoped<IRepository, Repository>();
+
 builder.Services.AddDbContext<DemoDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("weatherdb")));
 
 var app = builder.Build();
@@ -20,6 +25,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
 }
 
 app.UseHttpsRedirection();
